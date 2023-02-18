@@ -46,8 +46,8 @@ if (isset($_POST['add_category_btn'])) {
 
     if ($new_image != "") {
         //$update_filename = $new_image;
-        $image_ext = pathinfo($image, PATHINFO_EXTENSION);
-        $update_filename = time() . '.' . $new_image;
+        $image_ext = pathinfo($new_image, PATHINFO_EXTENSION);
+        $update_filename = time() . '.' . $image_ext;
     } else {
         $update_filename = $old_image;
     }
@@ -58,7 +58,7 @@ if (isset($_POST['add_category_btn'])) {
 
     if ($update_query_run) {
         if ($_FILES['image']['name'] != "") {
-            move_uploaded_file($_FILES['image']['tmp_name'], $path . '/' . $new_image);
+            move_uploaded_file($_FILES['image']['tmp_name'], $path . '/' . $update_filename);
             if (file_exists("../uploads/" . $old_image)) {
                 unlink("../uploads/" . $old_image);
             }
